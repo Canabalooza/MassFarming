@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using Splatform;
 using System;
 using System.Collections.Generic;
@@ -170,7 +170,7 @@ namespace MassFarming
             }
         }
 
-        private static bool IsHotKeyPressed => Input.GetKey(MassFarming.ControllerPickupHotkey.Value.MainKey) || Input.GetKey(MassFarming.MassActionHotkey.Value.MainKey);
+        private static bool IsHotKeyPressed => MassFarming.IsPlantHotKeyPressed;
 
         private static List<Vector3> BuildPlantingGridPositions(Vector3 originPos, Plant placedPlant, Quaternion rotation)
         {
@@ -250,7 +250,7 @@ namespace MassFarming
                 return;
             }
 
-            if (!Input.GetKey(MassFarming.ControllerPickupHotkey.Value.MainKey) && !Input.GetKey(MassFarming.MassActionHotkey.Value.MainKey))
+            if (!IsHotKeyPressed)
             {
                 //Hotkey required
                 SetGhostsActive(false);
@@ -263,6 +263,8 @@ namespace MassFarming
                 SetGhostsActive(false);
                 return;
             }
+
+            MassFarming.TryAdjustPlantGridSize();
 
             if (!EnsureGhostsBuilt(__instance))
             {

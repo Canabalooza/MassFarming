@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using System.Reflection;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ namespace MassFarming
                 return;
             }
 
-            if (!Input.GetKey(MassFarming.ControllerPickupHotkey.Value.MainKey) && !Input.GetKey(MassFarming.MassActionHotkey.Value.MainKey))
+            if (!MassFarming.IsPickupHotKeyPressed)
             {
                 //Hotkey required
                 return;
